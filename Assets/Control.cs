@@ -8,36 +8,76 @@ public class Control : MonoBehaviour {
     
     private Rigidbody2D rb2d;
     private Vector2 curVel;
-    private float jumpPower = 150f;
-    private bool grounded = true;
-    
+
+    public float jumpForce = 150f;
+    public float jumpTime = 300f;
+    public float jumpTimeCounter;
+
+    public bool grounded;
+    public LayerMask whatIsGround;
+    public bool stoppedJumping;
+
+    public Transform groundCheck;
+    public float groundCheckRadius;
+
     void Start()
     {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
+        jumpTimeCounter = jumpTime;
+
+        Debug.Log(jumpTimeCounter);
     }
 
 
     void Update()
     {
-        
-    }
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
+        //if we are grounded...
+        if (grounded)
+        {
+            //the jumpcounter is whatever we set jumptime to in the editor.
+            jumpTimeCounter = jumpTime;
+
+        }
+    }
     void FixedUpdate()
     {
         curVel.x = Input.GetAxis("Horizontal") * speed;
         rb2d.velocity = curVel;
 
-        if (grounded && Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            grounded = false;
-            rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            //and you are on the ground...
+            if (grounded)
+            {
+                //jump!
+                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+                stoppedJumping = false;
+            }
+        }
+
+        //if you keep holding down the mouse button...
+        if (Input.GetKey(KeyCode.Space) && !stoppedJumping)
+        {
+            //and your counter hasn't reached zero...
+            if (jumpTimeCounter > 0)
+            {
+                //keep jumping!
+                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+        }
+
+
+        //if you stop holding down the mouse button...
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            //stop jumping and set your counter to zero.  The timer will reset once we touch the ground again in the update function.
+            jumpTimeCounter = 0;
+            stoppedJumping = true;
         }
     }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-            grounded = true;
-    }
+    
 }
