@@ -21,9 +21,7 @@ public class Control : MonoBehaviour {
     void FixedUpdate()
     {
         curVel.x = Input.GetAxis("Horizontal") * speed;
-        rb2d.velocity = curVel;
-
-        
+        rb2d.velocity = curVel;        
     }
     
 }
