@@ -19,41 +19,44 @@ public class Patrol : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
         curVel.x = speed;
-        StartCoroutine("pause");
+        toDest1();
     }
 
     void Update()
     {
-        
-    }
-
-    void toDest1()
-    {
-        while(transform.position.x <= dest1)
-        {
-            rb2d.velocity = curVel;
-        }
-        isReturn = true;
-        StartCoroutine(pause());
-    }
-
-    void toDest2()
-    {
-        while (transform.position.x >= dest2)
-        {
-            rb2d.velocity = -curVel;            
-        }
-        isReturn = false;
-        StartCoroutine(pause());
-    }
-
-    IEnumerator pause()
-    {
-        Debug.Log("Heloo");
-        yield return new WaitForSeconds(0.5f);
         if (isReturn)
             toDest2();
         else
             toDest1();
+    }
+
+    void toDest1()
+    {
+        Debug.Log("Heloo");
+        
+        rb2d.velocity = curVel;
+        if(transform.position.x >= dest1)
+            isReturn = true;
+    }
+
+    void toDest2()
+    {
+        Debug.Log("Heloo");
+        rb2d.velocity = -curVel;
+        if(transform.position.x <= dest2)        
+            isReturn = false;
+    }
+
+    IEnumerator Return()
+    {
+        Debug.Log("Heloo");
+
+        yield return new WaitForSeconds(1f);
+                
+        if (isReturn)
+            toDest2();
+        else
+            toDest1();
+         
     }
 }
