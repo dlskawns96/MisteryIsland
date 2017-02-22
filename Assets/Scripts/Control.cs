@@ -13,6 +13,7 @@ public class Control : MonoBehaviour {
 
     void Start()
     {
+       
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
         
