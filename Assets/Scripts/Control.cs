@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Control : MonoBehaviour {
 
-    public float speed = 5f;
+    public float speed = 100f;
     
     private Rigidbody2D rb2d;
     private Vector2 curVel;
