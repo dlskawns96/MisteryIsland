@@ -7,16 +7,12 @@ public class Control : MonoBehaviour {
     public float speed = 100f;
     
     private Rigidbody2D rb2d;
-    private Vector2 curVel;
-
-    
+    private Vector2 curVel;    
 
     void Start()
-    {
-       
+    {       
         rb2d = gameObject.GetComponent<Rigidbody2D>();
-        curVel = rb2d.velocity;
-        
+        curVel = rb2d.velocity;        
     }
     
     void FixedUpdate()

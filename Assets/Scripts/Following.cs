@@ -4,36 +4,48 @@ using UnityEngine;
 
 public class Following : MonoBehaviour {
 
-    GameObject target;
-    private bool targetOn = false;
-    private Rigidbody2D rb2d;
+    private bool targetOn = false, atLeft;
+    private GameObject target;
     private float speed;
-    private float jumpForce = 100f;
+    private Rigidbody2D rb2d;
 
-	void Start () {
-        target = null;
-        rb2d = GetComponent<Rigidbody2D>();
-        speed = GetComponent<Patrol>().getSpeed();
-    }
-	
-	void Update () {
-		if(targetOn)
-        {
- 
-        }
-	}
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if(collision.gameObject.tag == "Character")
+        speed = GetComponent<Patrol>().getSpeed();
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if(targetOn)
         {
-            target = collision.gameObject;
-            targetOn = true;
+
+            if (target.transform.position.x > transform.position.x) // 타겟이 오른쪽에 있으면
+                atLeft = false;            
+            else                                                    // 타겟이 왼쪽에 있으면
+                atLeft = true;
         }
-        if(collision.gameObject.tag == "JumpPoint")
+    }
+
+    private void FixedUpdate()
+    {
+        if(targetOn)
         {
-            Debug.Log("Jump!!!");
-            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+            if(atLeft)
+            {
+
+            }
+            else
+            {
+
+            }
         }
+    }
+
+    public void targeting(GameObject target)
+    {
+        GetComponent<Patrol>().targeting();
+        targetOn = true; 
+        this.target = target;
     }
 }

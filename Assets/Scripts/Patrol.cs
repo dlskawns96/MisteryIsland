@@ -10,12 +10,14 @@ public class Patrol : MonoBehaviour
     private bool isReturn = true;
     private Vector2 curVel;
     private bool isPatrol = true;
-    private bool isWaiting = false;
+    private float jumpForce = 2500f;
+    public bool isLanded = true;
+    public bool isJumped = true;
 
     void Start()
     {
-        dest1 = transform.position.x + 100;
-        dest2 = transform.position.x - 100;
+        dest1 = transform.position.x + 200;
+        dest2 = transform.position.x - 200;
         rb2d = GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
         curVel.x = speed;
@@ -23,12 +25,26 @@ public class Patrol : MonoBehaviour
 
     void Update()
     {
-        if(isPatrol && !isWaiting)
+        if(!isPatrol)
+        {
+            GetComponent<Patrol>().enabled = false;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (isPatrol)
         {
             if (isReturn)
                 toDest2();
             else
                 toDest1();
+        }
+
+        if (!isLanded && !isJumped)
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
+            isJumped = true;
         }
     }
 
@@ -37,8 +53,6 @@ public class Patrol : MonoBehaviour
         rb2d.velocity = curVel;
         if (transform.position.x >= dest1)
         {
-            isWaiting = true;
-            StartCoroutine(waitAndTurn());
             transform.rotation = Quaternion.Euler(0, 0, 0);
             isReturn = true;
         }
@@ -49,17 +63,14 @@ public class Patrol : MonoBehaviour
         rb2d.velocity = -curVel;
         if (transform.position.x <= dest2)
         {
-            isWaiting = true;
-            StartCoroutine(waitAndTurn());
             transform.rotation = Quaternion.Euler(0, 180, 0);
             isReturn = false;
         }
     }
 
-    IEnumerator waitAndTurn()
+    public void targeting()
     {
-        yield return new WaitForSeconds(0.5f);
-        isWaiting = false;
+        isPatrol = false;
     }
 
     public float getSpeed()
