@@ -14,10 +14,10 @@ public class Control : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;        
     }
-    
+
     void FixedUpdate()
     {
-        curVel.x = Input.GetAxis("Horizontal") * speed;
+        curVel.x = Input.GetAxisRaw("Horizontal") * speed;
         rb2d.velocity = curVel;        
     }
     

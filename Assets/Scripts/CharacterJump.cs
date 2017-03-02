@@ -6,7 +6,7 @@ public class CharacterJump : MonoBehaviour {
 
     private Rigidbody2D rb2d;
 
-    public float jumpForce = 100f;
+    public float jumpForce = 10000f;
     public float jumpTime = 0.25f;
     public float jumpTimeCounter;
 
@@ -18,7 +18,6 @@ public class CharacterJump : MonoBehaviour {
     public float groundCheckRadius;
 
     void Start () {
-
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         jumpTimeCounter = jumpTime;
     }
@@ -30,10 +29,13 @@ public class CharacterJump : MonoBehaviour {
         {
             jumpTimeCounter = jumpTime;
         }
+
+        
     }
 
     void FixedUpdate()
     {
+       
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (grounded)
@@ -50,7 +52,6 @@ public class CharacterJump : MonoBehaviour {
             {
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
-
             }
         }
         
