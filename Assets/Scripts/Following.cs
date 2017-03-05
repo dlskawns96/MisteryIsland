@@ -33,11 +33,11 @@ public class Following : MonoBehaviour {
         {
             if(atLeft)
             {
-
+                rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
             }
             else
             {
-
+                rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
             }
         }
     }

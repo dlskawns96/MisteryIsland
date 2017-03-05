@@ -10,9 +10,10 @@ public class Patrol : MonoBehaviour
     private bool isReturn = true;
     private Vector2 curVel;
     private bool isPatrol = true;
-    private float jumpForce = 2500f;
+    private float jumpForce = 200f;
     public bool isLanded = true;
-    public bool isJumped = true;
+    public bool isJumped = false;
+
 
     void Start()
     {
@@ -21,14 +22,12 @@ public class Patrol : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
         curVel.x = speed;
+
     }
 
     void Update()
     {
-        if(!isPatrol)
-        {
-            GetComponent<Patrol>().enabled = false;
-        }
+          
     }
 
     private void FixedUpdate()
@@ -40,27 +39,29 @@ public class Patrol : MonoBehaviour
             else
                 toDest1();
         }
-
         if (!isLanded && !isJumped)
         {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
             isJumped = true;
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
         }
+
+
     }
 
     void toDest1()
     {
-        rb2d.velocity = curVel;
+        rb2d.velocity = new Vector2(speed,rb2d.velocity.y);
         if (transform.position.x >= dest1)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             isReturn = true;
         }
+
     }
 
     void toDest2()
     {
-        rb2d.velocity = -curVel;
+        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
         if (transform.position.x <= dest2)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -77,4 +78,5 @@ public class Patrol : MonoBehaviour
     {
         return speed;
     }
+    
 }

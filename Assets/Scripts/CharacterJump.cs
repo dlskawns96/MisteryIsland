@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterJump : MonoBehaviour {
+public class CharacterJump : MonoBehaviour
+{
 
     private Rigidbody2D rb2d;
 
@@ -17,25 +18,27 @@ public class CharacterJump : MonoBehaviour {
     public Transform groundCheck;
     public float groundCheckRadius;
 
-    void Start () {
+    void Start()
+    {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         jumpTimeCounter = jumpTime;
     }
-	
-	void Update () {
+
+    void Update()
+    {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        
+
         if (grounded)
         {
             jumpTimeCounter = jumpTime;
         }
 
-        
+
     }
 
     void FixedUpdate()
     {
-       
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (grounded)
@@ -45,7 +48,7 @@ public class CharacterJump : MonoBehaviour {
                 stoppedJumping = false;
             }
         }
-        
+
         if (Input.GetKey(KeyCode.Space) && !stoppedJumping)
         {
             if (jumpTimeCounter > 0)
@@ -54,7 +57,7 @@ public class CharacterJump : MonoBehaviour {
                 jumpTimeCounter -= Time.deltaTime;
             }
         }
-        
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             jumpTimeCounter = 0;
