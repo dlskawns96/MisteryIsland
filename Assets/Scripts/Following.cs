@@ -13,20 +13,9 @@ public class Following : MonoBehaviour {
     {
         speed = GetComponent<Patrol>().getSpeed();
         rb2d = GetComponent<Rigidbody2D>();
+        StartCoroutine(CheckDirection());
     }
-
-    private void Update()
-    {
-        if(targetOn)
-        {
-
-            if (target.transform.position.x > transform.position.x) // 타겟이 오른쪽에 있으면
-                atLeft = false;            
-            else                                                    // 타겟이 왼쪽에 있으면
-                atLeft = true;
-        }
-    }
-
+    
     private void FixedUpdate()
     {
         if(targetOn)
@@ -47,5 +36,19 @@ public class Following : MonoBehaviour {
         GetComponent<Patrol>().targeting();
         targetOn = true; 
         this.target = target;
+    }
+
+    IEnumerator CheckDirection() //따라갈때 방향전환 딜레이
+    {
+        if (targetOn)
+        {
+            if (target.transform.position.x > transform.position.x) // 타겟이 오른쪽에 있으면
+                atLeft = false;
+            else                                                    // 타겟이 왼쪽에 있으면
+                atLeft = true;
+        }
+
+        yield return new WaitForSecondsRealtime(0.5f);
+        StartCoroutine(CheckDirection());
     }
 }
