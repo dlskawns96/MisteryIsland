@@ -13,7 +13,5 @@ public class EnemyAttack : MonoBehaviour {
 
     public void attack()
     {
-        //공격 모션 애니메이션 실행
-
     }
 }

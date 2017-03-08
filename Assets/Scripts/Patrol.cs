@@ -13,8 +13,7 @@ public class Patrol : MonoBehaviour
     private float jumpForce = 200f;
     public bool isLanded = true;
     public bool isJumped = false;
-
-
+    
     void Start()
     {
         dest1 = transform.position.x + 200;
@@ -22,7 +21,6 @@ public class Patrol : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
         curVel.x = speed;
-
     }
 
     void Update()
@@ -32,6 +30,7 @@ public class Patrol : MonoBehaviour
 
     private void FixedUpdate()
     {
+       
         if (isPatrol)
         {
             if (isReturn)
@@ -44,8 +43,7 @@ public class Patrol : MonoBehaviour
             isJumped = true;
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
         }
-
-
+        
     }
 
     void toDest1()

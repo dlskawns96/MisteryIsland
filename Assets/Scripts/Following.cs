@@ -8,6 +8,7 @@ public class Following : MonoBehaviour {
     private GameObject target;
     private float speed;
     private Rigidbody2D rb2d;
+    public bool isAttacking = false;
 
     private void Start()
     {
@@ -20,13 +21,18 @@ public class Following : MonoBehaviour {
     {
         if(targetOn)
         {
-            if(atLeft)
+            if(!isAttacking)
             {
-                rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
-            }
-            else
-            {
-                rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                if (atLeft)
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+                }
+                else
+                {           
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+                }
             }
         }
     }
