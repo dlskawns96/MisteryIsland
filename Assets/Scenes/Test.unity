@@ -183,7 +183,6 @@ GameObject:
   - component: {fileID: 255852286}
   - component: {fileID: 255852290}
   - component: {fileID: 255852293}
-  - component: {fileID: 255852291}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -288,18 +287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLanded: 1
   isJumped: 0
-  isAttacking: 0
---- !u!114 &255852291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 255852285}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d29cbb87d63d204ba00e6379dc69ed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &255852293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9448078a2028f1e41afc04e08834a207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!1 &320344078
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +467,7 @@ GameObject:
   - component: {fileID: 680596917}
   - component: {fileID: 680596918}
   - component: {fileID: 680596919}
+  - component: {fileID: 680596920}
   m_Layer: 0
   m_Name: Detecter
   m_TagString: Untagged
@@ -524,6 +513,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ce7e0b45403bf49a9e5a037a76f8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targeted: 0
+  takenTime: 0
+--- !u!50 &680596920
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 680596916}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &743100198
 GameObject:
   m_ObjectHideFlags: 0

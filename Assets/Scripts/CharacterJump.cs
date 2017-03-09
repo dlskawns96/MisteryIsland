@@ -39,7 +39,7 @@ public class CharacterJump : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
             if (grounded)
             {
@@ -49,7 +49,7 @@ public class CharacterJump : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Space) && !stoppedJumping)
+        if (Input.GetKey(KeyCode.LeftAlt) && !stoppedJumping)
         {
             if (jumpTimeCounter > 0)
             {
@@ -58,7 +58,7 @@ public class CharacterJump : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
         {
             jumpTimeCounter = 0;
             stoppedJumping = true;
