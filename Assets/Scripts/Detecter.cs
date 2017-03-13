@@ -5,13 +5,18 @@ using UnityEngine;
 public class Detecter : MonoBehaviour {
 
     public bool targeted = false;
+    private bool motionEnded = false;
+
     private float attackRange = 3f;
     private float attackDelay = 1f;
-    private int attackDamage = 10;
+    private float attackTime = 0.2f;
     public float takenTime;
-    private bool isIn;
+
+    private int attackDamage = 10;
+
     private GameObject target;
     private BoxCollider2D collider2d;
+    
 
     /*
      *  TriggerEnter로 들어오면 타이머를 키고
@@ -27,13 +32,15 @@ public class Detecter : MonoBehaviour {
 
     private void Update()
     {
-
+       
         if (takenTime >= attackDelay)
         {
-            Debug.Log("업데이트에 걸림");
-            target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
+           // Debug.Log("업데이트에 걸림");
+            //target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
+            StartCoroutine(waitAndAttack());
             takenTime = 0;
-        }   
+        } 
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -50,6 +57,14 @@ public class Detecter : MonoBehaviour {
             }
             else
             {
+                StartCoroutine(waitAndAttack());
+                if(motionEnded)
+                {
+                    target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
+                    Debug.Log("성공");
+                    motionEnded = false;
+                    GetComponentInParent<Following>().isAttacking = false;
+                }
                 GetComponentInParent<Following>().isAttacking= true;
                 //takenTime = 0f;
                 //StartCoroutine(counter());
@@ -64,20 +79,24 @@ public class Detecter : MonoBehaviour {
             if(targeted)
             {
 
+                if (motionEnded)
+                {
+                    target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
+                    Debug.Log("성공");
+                    motionEnded = false;
+                    GetComponentInParent<Following>().isAttacking = false;
+                    StartCoroutine(waitAndAttack());
+                }
                 /*
                  *   공격 애니메이션 실행
                  */
-                
-                GetComponentInParent<Following>().isAttacking = true;
-                takenTime += Time.deltaTime;
-                Debug.Log("스때이");
-                
-                    /*
-                     *   딜레이 만큼 시간이 지났는데 아직도 공격범위에 있다면 공격 
-                   
-                    takenTime = 0;
-                    GetComponentInParent<Following>().isAttacking = false;  */
-                    
+
+                /*
+                 *   딜레이 만큼 시간이 지났는데 아직도 공격범위에 있다면 공격 
+
+                takenTime = 0;
+                GetComponentInParent<Following>().isAttacking = false;  */
+
             }
         }
     }
@@ -99,16 +118,13 @@ public class Detecter : MonoBehaviour {
         }
     }
 
-    IEnumerator counter()
+    IEnumerator waitAndAttack()
     {
+        GetComponentInParent<Following>().isAttacking = true;
         yield return new WaitForSecondsRealtime(attackDelay);
-        Debug.Log("코루틴 : " + takenTime);
-        if (takenTime >= attackDelay)
-        {
-            target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
-            Debug.Log("코루틴에 걸림");
-        }
-        GetComponentInParent<Following>().isAttacking = false;
+        motionEnded = true;
+        yield return new WaitForSecondsRealtime(attackTime);
+        motionEnded = false;
     }
 
     IEnumerator waitAndContinue(float leftTime)
