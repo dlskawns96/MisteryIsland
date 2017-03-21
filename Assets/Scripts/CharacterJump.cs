@@ -8,7 +8,7 @@ public class CharacterJump : MonoBehaviour
     private Rigidbody2D rb2d;
 
     public float jumpForce = 10000f;
-    public float jumpTime = 0.25f;
+    public float jumpTime = 0.05f;
     public float jumpTimeCounter;
 
     public bool grounded;
