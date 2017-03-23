@@ -32,8 +32,6 @@ public class CharacterJump : MonoBehaviour
         {
             jumpTimeCounter = jumpTime;
         }
-
-
     }
 
     void FixedUpdate()

@@ -60,7 +60,11 @@ public class Detecter : MonoBehaviour {
                 StartCoroutine(waitAndAttack());
                 if(motionEnded)
                 {
-                    target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
+                    target.GetComponent<CharacterStatus>().attacked(attackDamage);
+                    if (transform.position.x > target.transform.position.x) //타겟이 오른쪽
+                        target.GetComponent<CharacterStatus>().knockFromRight = false;
+                    else
+                        target.GetComponent<CharacterStatus>().knockFromRight = true;
                     Debug.Log("성공");
                     motionEnded = false;
                     GetComponentInParent<Following>().isAttacking = false;
@@ -78,10 +82,13 @@ public class Detecter : MonoBehaviour {
         {
             if(targeted)
             {
-
                 if (motionEnded)
                 {
                     target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
+                    if (transform.position.x > target.transform.position.x) //타겟이 오른쪽
+                        target.GetComponent<CharacterStatus>().knockFromRight = true;
+                    else
+                        target.GetComponent<CharacterStatus>().knockFromRight = false;
                     Debug.Log("성공");
                     motionEnded = false;
                     GetComponentInParent<Following>().isAttacking = false;

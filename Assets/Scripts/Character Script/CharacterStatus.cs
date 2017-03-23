@@ -12,10 +12,18 @@ public class CharacterStatus : MonoBehaviour {
     private bool isUnbeatable;
     private Color col;
     private float t;
+    private Rigidbody2D rb2d;
+
+    private float knockback = 200;
+    private float knockbackLength;
+    private float knockbackCount = 0.2f;
+    public bool knockFromRight;
+    public bool isKnocked = false;
 
     private void Start()
     {
         col = GetComponent<SpriteRenderer>().color;
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     public void attacked(int damage)
@@ -29,6 +37,14 @@ public class CharacterStatus : MonoBehaviour {
             HP -= damage;
             Debug.Log(HP);
             isUnbeatable = true;
+            GetComponent<CharacterControl>().isKnocked = true;
+            
+            if (knockFromRight)
+                rb2d.velocity = new Vector2(-knockback, knockback);
+            else
+                rb2d.velocity = new Vector2(knockback, knockback);
+
+              
             StartCoroutine(makeBeatable());
         }
     }
