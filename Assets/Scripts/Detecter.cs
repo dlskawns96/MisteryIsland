@@ -6,6 +6,7 @@ public class Detecter : MonoBehaviour {
 
     public bool targeted = false;
     private bool motionEnded = false;
+    public bool isBeaten = false;
 
     private float attackRange = 3f;
     private float attackDelay = 1f;
@@ -37,8 +38,12 @@ public class Detecter : MonoBehaviour {
         {
            // Debug.Log("업데이트에 걸림");
             //target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
-            StartCoroutine(waitAndAttack());
-            takenTime = 0;
+            if(!isBeaten)
+            {
+
+                StartCoroutine(waitAndAttack());
+                takenTime = 0;
+            }
         } 
         
     }
@@ -57,19 +62,23 @@ public class Detecter : MonoBehaviour {
             }
             else
             {
-                StartCoroutine(waitAndAttack());
-                if(motionEnded)
+                if(!isBeaten)
                 {
-                    target.GetComponent<CharacterStatus>().attacked(attackDamage);
-                    if (transform.position.x > target.transform.position.x) //타겟이 오른쪽
-                        target.GetComponent<CharacterStatus>().knockFromRight = false;
-                    else
-                        target.GetComponent<CharacterStatus>().knockFromRight = true;
-                    Debug.Log("성공");
-                    motionEnded = false;
-                    GetComponentInParent<Following>().isAttacking = false;
+                    StartCoroutine(waitAndAttack());
+                    if (motionEnded)
+                    {
+                        target.GetComponent<CharacterStatus>().attacked(attackDamage);
+                        if (transform.position.x > target.transform.position.x) //왼쪽
+                            target.GetComponent<CharacterStatus>().knockFromRight = false;
+                        else
+                            target.GetComponent<CharacterStatus>().knockFromRight = true;
+                        Debug.Log("성공");
+                        motionEnded = false;
+                        GetComponentInParent<Following>().isAttacking = false;
+                    }
+                    GetComponentInParent<Following>().isAttacking = true;
                 }
-                GetComponentInParent<Following>().isAttacking= true;
+                
                 //takenTime = 0f;
                 //StartCoroutine(counter());
             }
@@ -82,7 +91,7 @@ public class Detecter : MonoBehaviour {
         {
             if(targeted)
             {
-                if (motionEnded)
+                if (motionEnded && !isBeaten)
                 {
                     target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
                     if (transform.position.x > target.transform.position.x) //타겟이 오른쪽

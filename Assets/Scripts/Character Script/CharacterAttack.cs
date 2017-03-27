@@ -9,17 +9,51 @@ using UnityEngine;
 
 public class CharacterAttack : MonoBehaviour {
 
-	// Use this for initialization
+    private int attackPower = 1;
+    private float attackDelay = 0.2f;
+    private bool isAttacking = false;
+    private BoxCollider2D attackRange;
+    
 	void Start () {
+        attackRange = GetComponent<BoxCollider2D>();
+        attackRange.enabled = false;
+	}
+
+	void Update () {
+        if(!isAttacking)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                /*공격*/
+                attackRange.enabled = true;
+                isAttacking = true;
+                StartCoroutine(attacking());
+                StartCoroutine(delayAttack());
+            }
+        }
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            /*공격*/
 
+    IEnumerator delayAttack()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        isAttacking = false;
+    }
+
+    IEnumerator attacking()
+    {
+        //공격애니메이션 실행
+
+        yield return new WaitForSecondsRealtime(attackDelay);
+        attackRange.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            //공격
+            collision.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
         }
-	}
+    }
 }

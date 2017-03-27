@@ -9,6 +9,7 @@ public class Following : MonoBehaviour {
     private float speed;
     private Rigidbody2D rb2d;
     public bool isAttacking = false;
+    public bool isBeaten = false;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class Following : MonoBehaviour {
     {
         if(targetOn)
         {
-            if(!isAttacking)
+            if(!isAttacking && !isBeaten)
             {
                 if (atLeft)
                 {
