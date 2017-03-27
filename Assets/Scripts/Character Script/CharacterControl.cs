@@ -17,6 +17,15 @@ public class CharacterControl : MonoBehaviour {
         curVel = rb2d.velocity;        
     }
 
+    private void Update()
+    {
+       if(Input.GetKeyDown(KeyCode.LeftArrow))
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+       else if(Input.GetKeyDown(KeyCode.RightArrow))
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+
+    }
+
     void FixedUpdate()
     {
         if(!isKnocked)
@@ -27,6 +36,7 @@ public class CharacterControl : MonoBehaviour {
         else
         {
             StartCoroutine(waitKnocked());
+            
         }
     }
 
