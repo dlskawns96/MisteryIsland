@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    private Rigidbody2D rb2d;
-    private Vector2 curVel;
-    public bool isBeaten = false;
+    private GameObject character;
+    private float offset;
 
-    // Use this for initialization
-    void Start () {
-        rb2d = gameObject.GetComponent<Rigidbody2D>();
-        curVel = rb2d.velocity;
+    private void Start()
+    {
+        character = GameObject.FindGameObjectWithTag("Character");
+        offset = transform.position.x - character.transform.position.x;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if(!isBeaten)
-        {
-            curVel.x = Input.GetAxisRaw("Horizontal") * 100f;
-            rb2d.velocity = curVel;
-        }        
+
+    private void LateUpdate()
+    {
+        transform.position = new Vector3(character.transform.position.x + offset, transform.position.y, -10);
     }
 }

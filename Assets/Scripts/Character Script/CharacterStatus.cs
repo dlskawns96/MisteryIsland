@@ -14,16 +14,19 @@ public class CharacterStatus : MonoBehaviour {
     private float t;
     private Rigidbody2D rb2d;
 
-    private float knockback = 200;
+    private float knockback = 2;
     private float knockbackLength;
     private float knockbackCount = 0.2f;
     public bool knockFromRight;
     public bool isKnocked = false;
 
+    private GameObject camera;
+
     private void Start()
     {
         col = GetComponent<SpriteRenderer>().color;
         rb2d = GetComponent<Rigidbody2D>();
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     public void attacked(int damage)
@@ -35,10 +38,9 @@ public class CharacterStatus : MonoBehaviour {
         if(!isUnbeatable)
         {
             HP -= damage;
-            Debug.Log(HP);
             isUnbeatable = true;
             GetComponent<CharacterControl>().isKnocked = true;
-            
+
             if (knockFromRight)
                 rb2d.velocity = new Vector2(-knockback, knockback);
             else
@@ -70,6 +72,7 @@ public class CharacterStatus : MonoBehaviour {
          * 반짝반짝 효과
          */
         StartCoroutine(makeTwinkle());
+        
         Debug.Log("무적");
         yield return new WaitForSecondsRealtime(0.5f);
         isUnbeatable = false;
