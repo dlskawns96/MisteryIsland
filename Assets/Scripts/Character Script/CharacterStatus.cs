@@ -14,7 +14,7 @@ public class CharacterStatus : MonoBehaviour {
     private float t;
     private Rigidbody2D rb2d;
 
-    private float knockback = 200;
+    private float knockback = 2;
     private float knockbackLength;
     private float knockbackCount = 0.2f;
     public bool knockFromRight;
@@ -38,7 +38,6 @@ public class CharacterStatus : MonoBehaviour {
         if(!isUnbeatable)
         {
             HP -= damage;
-            Debug.Log(HP);
             isUnbeatable = true;
             GetComponent<CharacterControl>().isKnocked = true;
 

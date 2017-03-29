@@ -64,6 +64,8 @@ public class Detecter : MonoBehaviour {
             {
                 if(!isBeaten)
                 {
+
+                    GetComponentInParent<Following>().isAttacking = true;
                     StartCoroutine(waitAndAttack());
                     if (motionEnded)
                     {
@@ -77,7 +79,6 @@ public class Detecter : MonoBehaviour {
                         motionEnded = false;
                         GetComponentInParent<Following>().isAttacking = false;
                     }
-                    GetComponentInParent<Following>().isAttacking = true;
                 }
                 
             }
@@ -92,7 +93,7 @@ public class Detecter : MonoBehaviour {
             {
                 if (motionEnded && !isBeaten)
                 {
-                    
+                    GetComponentInParent<Following>().isAttacking = true;
                     if (transform.position.x > target.transform.position.x) //타겟이 오른쪽
                         target.GetComponent<CharacterStatus>().knockFromRight = true;
                     else

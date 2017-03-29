@@ -17,12 +17,12 @@ public class Following : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
         StartCoroutine(CheckDirection());
     }
-    
-    private void FixedUpdate()
+
+    private void Update()
     {
-        if(targetOn)
+        if (targetOn)
         {
-            if(!isAttacking && !isBeaten)
+            if (!isAttacking && !isBeaten)
             {
                 if (atLeft)
                 {
@@ -30,12 +30,17 @@ public class Following : MonoBehaviour {
                     rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
                 }
                 else
-                {           
+                {
                     transform.rotation = Quaternion.Euler(0, 180, 0);
                     rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
                 }
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+       
     }
 
     public void targeting(GameObject target)
@@ -57,5 +62,17 @@ public class Following : MonoBehaviour {
 
         yield return new WaitForSecondsRealtime(0.5f);
         StartCoroutine(CheckDirection());
+    }
+
+    void goLeft()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
+    }
+
+    void goRight()
+    {
+        transform.rotation = Quaternion.Euler(0, 180, 0);
+        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
     }
 }

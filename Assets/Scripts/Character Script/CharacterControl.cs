@@ -93,7 +93,7 @@ public class CharacterControl : MonoBehaviour {
         
         rb2d.velocity = Vector2.zero;
 
-        Vector2 jumpVelocity = new Vector2(0, 500);
+        Vector2 jumpVelocity = new Vector2(0, 10);
         rb2d.AddForce(jumpVelocity, ForceMode2D.Impulse);
 
         isJumping = false;

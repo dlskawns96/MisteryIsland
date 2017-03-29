@@ -5,12 +5,12 @@ using UnityEngine;
 public class Patrol : MonoBehaviour
 {
     private float dest1, dest2;
-    private float speed = 100f;
+    private float speed = 10f;
     private Rigidbody2D rb2d;
     private bool isReturn = true;
     private Vector2 curVel;
     private bool isPatrol = true;
-    private float jumpForce = 200f;
+    private float jumpForce = 20f;
     public bool isLanded = true;
     public bool isJumped = false;
     
