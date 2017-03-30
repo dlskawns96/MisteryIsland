@@ -5,13 +5,12 @@ using UnityEngine;
 public class Detecter : MonoBehaviour {
 
     public bool targeted = false;
-    private bool motionEnded = false;
     public bool isBeaten = false;
+    private bool isAttacking = false;
 
-    private float attackRange = 3f;
+    private float attackRange = 5f;
     private float attackDelay = 1f;
     private float attackTime = 0.2f;
-    public float takenTime;
 
     private int attackDamage = 10;
 
@@ -31,23 +30,6 @@ public class Detecter : MonoBehaviour {
         collider2d = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
-    {
-       
-        if (takenTime >= attackDelay)
-        {
-           // Debug.Log("업데이트에 걸림");
-            //target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
-            if(!isBeaten)
-            {
-
-                StartCoroutine(waitAndAttack());
-                takenTime = 0;
-            }
-        } 
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Character")
@@ -62,92 +44,31 @@ public class Detecter : MonoBehaviour {
             }
             else
             {
-                if(!isBeaten)
+                if(!isAttacking && !isBeaten)
                 {
-
-                    GetComponentInParent<Following>().isAttacking = true;
                     StartCoroutine(waitAndAttack());
-                    if (motionEnded)
-                    {
-                        
-                        if (transform.position.x > target.transform.position.x) //왼쪽
-                            target.GetComponent<CharacterStatus>().knockFromRight = true;
-                        else
-                            target.GetComponent<CharacterStatus>().knockFromRight = false;
-                        target.GetComponent<CharacterStatus>().attacked(attackDamage);
-                        Debug.Log("성공");
-                        motionEnded = false;
-                        GetComponentInParent<Following>().isAttacking = false;
-                    }
                 }
-                
-            }
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Character")
-        {
-            if(targeted)
-            {
-                if (motionEnded && !isBeaten)
+                else if(!isBeaten)
                 {
-                    GetComponentInParent<Following>().isAttacking = true;
-                    if (transform.position.x > target.transform.position.x) //타겟이 오른쪽
-                        target.GetComponent<CharacterStatus>().knockFromRight = true;
-                    else
+                    if (target.transform.position.x > transform.position.x)
                         target.GetComponent<CharacterStatus>().knockFromRight = false;
-                    target.gameObject.GetComponent<CharacterStatus>().attacked(attackDamage);
-                    Debug.Log("성공");
-                    motionEnded = false;
-                    GetComponentInParent<Following>().isAttacking = false;
-                    StartCoroutine(waitAndAttack());
+                    else
+                        target.GetComponent<CharacterStatus>().knockFromRight = true;
+                    target.GetComponent<CharacterStatus>().attacked(attackDamage);
                 }
-                /*
-                 *   공격 애니메이션 실행
-                 */
-
-                /*
-                 *   딜레이 만큼 시간이 지났는데 아직도 공격범위에 있다면 공격 
-
-                takenTime = 0;
-                GetComponentInParent<Following>().isAttacking = false;  */
-
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Character")
-        {
-            if(takenTime >= attackDelay)
-            {
-                takenTime = 0;
-                GetComponentInParent<Following>().isAttacking = false;
-            }
-            else
-            {
-                Debug.Log("나가자자ㅏ");
-                StartCoroutine(waitAndContinue(attackDelay - takenTime));
             }
         }
     }
 
     IEnumerator waitAndAttack()
     {
+        isAttacking = true;
         GetComponentInParent<Following>().isAttacking = true;
+        collider2d.size = new Vector2(0, 0);
         yield return new WaitForSecondsRealtime(attackDelay);
-        motionEnded = true;
+        collider2d.size = new Vector2(attackRange, 1.95f);
         yield return new WaitForSecondsRealtime(attackTime);
-        motionEnded = false;
-    }
-
-    IEnumerator waitAndContinue(float leftTime)
-    {
-        yield return new WaitForSecondsRealtime(leftTime);
-        takenTime = 0;
+        isAttacking = false;
         GetComponentInParent<Following>().isAttacking = false;
     }
 }
