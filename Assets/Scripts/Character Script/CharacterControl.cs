@@ -11,8 +11,9 @@ public class CharacterControl : MonoBehaviour {
     private SpriteRenderer renderer;
     private bool isJumping = false;
     private bool isGrounded = true;
-
     public bool isKnocked = false;
+
+    private Animator ani;
 
     public Transform groundCheck;
     public float groundCheckRadius;
@@ -23,6 +24,7 @@ public class CharacterControl : MonoBehaviour {
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         curVel = rb2d.velocity;
         renderer = GetComponent<SpriteRenderer>();
+        ani = GetComponent<Animator>();
     }
 
     private void Update()
@@ -35,6 +37,7 @@ public class CharacterControl : MonoBehaviour {
         if (isGrounded && Input.GetKeyDown(KeyCode.LeftAlt))
         {
             isJumping = true;
+            ani.SetBool("ChracterWalking", false);
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -76,11 +79,20 @@ public class CharacterControl : MonoBehaviour {
     {
         Vector3 moveVelocity = Vector3.zero;
 
-        if(Input.GetAxisRaw("Horizontal") < 0)
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            ani.SetBool("ChracterWalking", true);
             moveVelocity = Vector3.left;
-        else if(Input.GetAxisRaw("Horizontal") > 0)
+        }
+        else if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            ani.SetBool("ChracterWalking", true);
             moveVelocity = Vector3.right;
-
+        }
+        else
+        {
+            ani.SetBool("ChracterWalking", false);
+        }
 
         transform.position += moveVelocity * speed * Time.deltaTime;
     }

@@ -254,7 +254,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 743100198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.026, y: -0.994, z: 0}
+  m_LocalPosition: {x: 0.026, y: -1.338, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1426538173}
@@ -403,7 +403,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1998423568422586, guid: e59ed9d039e661c43bb33db444fdb1d7, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e59ed9d039e661c43bb33db444fdb1d7, type: 2}
@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 1426538174}
   - component: {fileID: 1426538175}
   - component: {fileID: 1426538176}
+  - component: {fileID: 1426538177}
   m_Layer: 9
   m_Name: Character
   m_TagString: Character
@@ -440,9 +441,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.007988024, y: 0.007991791}
+  m_Offset: {x: 0.013152063, y: 0.02534914}
   serializedVersion: 2
-  m_Size: {x: 0.8148162, y: 1.9338522}
+  m_Size: {x: 1.2382675, y: 2.7152858}
 --- !u!50 &1426538171
 Rigidbody2D:
   serializedVersion: 4
@@ -494,7 +495,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 41531b0615971554ba5419ab3ad99aba, type: 3}
+  m_Sprite: {fileID: 21300008, guid: d031b98837da65148809494ab0c30b79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -505,7 +506,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1426538169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14, y: -3.5, z: 0}
+  m_LocalPosition: {x: -0.14, y: -3.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 743100199}
@@ -565,6 +566,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockFromRight: 0
   isKnocked: 0
+--- !u!95 &1426538177
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426538169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5bf488163f2de5b4ead2e75e2df5d0d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1440674204
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,9 +624,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.00000014901161, y: -0.0856204}
+  m_Offset: {x: 0.15696146, y: -0.044308275}
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1}
+  m_Size: {x: 1.8139232, y: 1.3304987}
 --- !u!114 &1440674207
 MonoBehaviour:
   m_ObjectHideFlags: 0
