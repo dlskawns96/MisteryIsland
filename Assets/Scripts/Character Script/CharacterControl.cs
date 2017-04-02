@@ -19,6 +19,8 @@ public class CharacterControl : MonoBehaviour {
     public float groundCheckRadius;
     public LayerMask whatIsGround;
 
+    public float up;
+
     void Start()
     {       
         rb2d = gameObject.GetComponent<Rigidbody2D>();
@@ -122,5 +124,11 @@ public class CharacterControl : MonoBehaviour {
 
         isJumping = false;
               
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "UpPoint")
+            transform.position = new Vector3(transform.position.x, transform.position.y + up, -1);
     }
 }
