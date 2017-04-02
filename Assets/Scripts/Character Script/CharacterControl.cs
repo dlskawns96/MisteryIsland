@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour {
 
-    public float speed = 100f;
+    private float speed = 3f;
     
     private Rigidbody2D rb2d;
     private Vector2 curVel;
     private SpriteRenderer renderer;
-    private bool isJumping = false;
+    public bool isJumping = false;
     private bool isGrounded = true;
     public bool isKnocked = false;
 
@@ -34,10 +34,22 @@ public class CharacterControl : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.RightArrow))
             renderer.flipX = false;
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            ani.SetBool("CharacterRunning", true);
+            ani.SetBool("CharacterWalking", false);
+            speed = 6f;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            ani.SetBool("CharacterRunning", false);
+            speed = 3f;
+        }
+
         if (isGrounded && Input.GetKeyDown(KeyCode.LeftAlt))
         {
             isJumping = true;
-            ani.SetBool("ChracterWalking", false);
+            ani.SetBool("CharacterWalking", false);
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -81,17 +93,17 @@ public class CharacterControl : MonoBehaviour {
 
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            ani.SetBool("ChracterWalking", true);
+            ani.SetBool("CharacterWalking", true);
             moveVelocity = Vector3.left;
         }
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            ani.SetBool("ChracterWalking", true);
+            ani.SetBool("CharacterWalking", true);
             moveVelocity = Vector3.right;
         }
         else
         {
-            ani.SetBool("ChracterWalking", false);
+            ani.SetBool("CharacterWalking", false);
         }
 
         transform.position += moveVelocity * speed * Time.deltaTime;

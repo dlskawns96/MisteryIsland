@@ -48,12 +48,15 @@ TagManager:
   - name: Chracter
     uniqueID: 864492591
     locked: 0
-  - name: Background
-    uniqueID: 597628155
-    locked: 0
   - name: Enemy
     uniqueID: 3985568891
     locked: 0
   - name: Object
     uniqueID: 2793661747
+    locked: 0
+  - name: Background
+    uniqueID: 597628155
+    locked: 0
+  - name: Sky
+    uniqueID: 1651594861
     locked: 0
