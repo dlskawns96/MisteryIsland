@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour {
 
-    private float speed = 3f;
+    private float speed = 2f;
     
     private Rigidbody2D rb2d;
     private Vector2 curVel;
@@ -38,12 +38,12 @@ public class CharacterControl : MonoBehaviour {
         {
             ani.SetBool("CharacterRunning", true);
             ani.SetBool("CharacterWalking", false);
-            speed = 6f;
+            speed = 4f;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             ani.SetBool("CharacterRunning", false);
-            speed = 3f;
+            speed = 2f;
         }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.LeftAlt))

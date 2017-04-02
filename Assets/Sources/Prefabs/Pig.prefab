@@ -204,7 +204,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targeted: 0
   isBeaten: 0
-  takenTime: 0
 --- !u!114 &114649041260106982
 MonoBehaviour:
   m_ObjectHideFlags: 1
