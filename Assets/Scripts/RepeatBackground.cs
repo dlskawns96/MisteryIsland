@@ -14,15 +14,15 @@ public class RepeatBackground : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (transform.position.x < -groundHorizontalLength)
             repositioningBackgrounds();
 	}
 
     private void repositioningBackgrounds()
     {
-        Vector3 groundOffset = new Vector3(groundHorizontalLength * 2f, 0, 5.5f);
-        transform.position = new Vector3(transform.position.x + groundOffset.x, 0, 5.5f);
+        Vector3 groundOffset = new Vector3((groundHorizontalLength * 2f), 0, 5.5f);
+        transform.position = new Vector3(transform.position.x + groundOffset.x - 0.001f, 0, 5.5f);
           
     }
 }
