@@ -25,17 +25,16 @@ public class EnemyStatus : MonoBehaviour {
             hp -= damage;
             isHitting = true;
             StartCoroutine(makeBeatable());
-        }
-        
+        }        
     }
 
     IEnumerator makeBeatable()
     {
         GetComponent<Following>().isBeaten = true;
-        GetComponentInChildren<Detecter>().isBeaten = true;
+        GetComponent<Detecter>().isBeaten = true;
         yield return new WaitForSecondsRealtime(unbeatableTime);
         isHitting = false;
         GetComponent<Following>().isBeaten = false;
-        GetComponentInChildren<Detecter>().isBeaten = false;
+        GetComponent<Detecter>().isBeaten = false;
     }
 }

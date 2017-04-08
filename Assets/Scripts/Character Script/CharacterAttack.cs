@@ -10,25 +10,51 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour {
 
     private int attackPower = 1;
-    private float attackDelay = 0.2f;
+    private float attackDelay = 0.5f;
+    private float attackTime = 0.2f;
+
     private bool isAttacking = false;
     private BoxCollider2D attackRange;
-    
+
+    private RaycastHit2D hit2d;
+    private float rayRange;
+
+    private bool canAttack;
+    private int mask;
+
+    private SpriteRenderer renderer;
+
 	void Start () {
         attackRange = GetComponent<BoxCollider2D>();
         attackRange.enabled = false;
-	}
+        rayRange = attackRange.size.x / 2;
+        mask = 1 << LayerMask.NameToLayer("Enemy");
+        renderer = GetComponentInParent<SpriteRenderer>();
+       
+    }
 
 	void Update () {
-        if(!isAttacking)
+        if (!isAttacking)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 /*공격*/
-                attackRange.enabled = true;
-                isAttacking = true;
                 StartCoroutine(attacking());
-                StartCoroutine(delayAttack());
+            }
+        }
+        else
+        {
+            if (renderer.flipX) //왼쪽
+            {
+                hit2d = Physics2D.Raycast(transform.position, Vector2.left, rayRange, mask);
+                Debug.DrawRay(transform.position, Vector2.left);
+            }
+            else
+                hit2d = Physics2D.Raycast(transform.position, Vector2.right, rayRange, mask);
+
+            if(hit2d)
+            {
+                hit2d.collider.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
             }
         }
 		
@@ -36,24 +62,15 @@ public class CharacterAttack : MonoBehaviour {
 
     IEnumerator delayAttack()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        isAttacking = true;
+        yield return new WaitForSecondsRealtime(attackTime);
         isAttacking = false;
     }
 
     IEnumerator attacking()
     {
-        //공격애니메이션 실행
-
+        //공격애니메이션 실행        
         yield return new WaitForSecondsRealtime(attackDelay);
-        attackRange.enabled = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
-            //공격
-            collision.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
-        }
+        StartCoroutine(delayAttack());
     }
 }

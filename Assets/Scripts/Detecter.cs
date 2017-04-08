@@ -7,6 +7,7 @@ public class Detecter : MonoBehaviour {
     public bool targeted = false;
     public bool isBeaten = false;
     private bool isAttacking = false;
+    private bool canAttack = false;
 
     private float attackRange = 5f;
     private float attackDelay = 1f;
@@ -16,7 +17,12 @@ public class Detecter : MonoBehaviour {
 
     private GameObject target;
     private BoxCollider2D collider2d;
-    
+
+    private bool isDetected;
+    private float detectRange;
+    private int mask;
+    private RaycastHit2D hit2d;
+    private RaycastHit2D attackHit2d;
 
     /*
      *  TriggerEnter로 들어오면 타이머를 키고
@@ -28,27 +34,67 @@ public class Detecter : MonoBehaviour {
     private void Start()
     {
         collider2d = GetComponent<BoxCollider2D>();
+        detectRange = collider2d.size.x * 2;
+        mask = 1 << LayerMask.NameToLayer("Character");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void FixedUpdate()
     {
-        if (collision.gameObject.tag == "Character")
+        if (!targeted)
         {
-            target = collision.gameObject;
-            if (!targeted)
+            if (transform.rotation.y == -1)
             {
-                GetComponentInParent<Following>().targeting(collision.gameObject);               
-                collider2d.size = new Vector2(attackRange, collider2d.size.y);
-
-                targeted = true;
+                hit2d = Physics2D.Raycast(transform.position, Vector2.right, detectRange, mask);
             }
             else
             {
-                if(!isAttacking && !isBeaten)
+                hit2d = Physics2D.Raycast(transform.position, Vector2.left, detectRange, mask);
+            }
+            if (hit2d)
+            {
+                GetComponent<Following>().targeting(hit2d.collider.gameObject);
+                targeted = true;
+                target = hit2d.collider.gameObject;
+                detectRange = detectRange / 2;
+            }
+        }   
+        else
+        {
+            if (transform.rotation.y == -1)
+            {
+                hit2d = Physics2D.Raycast(transform.position, Vector2.right, detectRange, mask);
+            }
+            else
+            {
+                hit2d = Physics2D.Raycast(transform.position, Vector2.left, detectRange, mask);
+            }
+
+            if(hit2d)
+            {
+                if (!isAttacking && !isBeaten)
                 {
                     StartCoroutine(waitAndAttack());
                 }
-                else if(!isBeaten)
+            }
+        }
+    }
+    
+    private void Update()
+    {
+        if(canAttack)
+        {
+            if (transform.rotation.y == -1)
+            {
+                attackHit2d = Physics2D.Raycast(transform.position, Vector2.right, detectRange, mask);
+            }
+            else
+            {
+                attackHit2d = Physics2D.Raycast(transform.position, Vector2.left, detectRange, mask);
+            }
+
+            if(attackHit2d)
+            {
+                if (!isBeaten)
                 {
                     if (target.transform.position.x > transform.position.x)
                         target.GetComponent<CharacterStatus>().knockFromRight = false;
@@ -63,12 +109,12 @@ public class Detecter : MonoBehaviour {
     IEnumerator waitAndAttack()
     {
         isAttacking = true;
-        GetComponentInParent<Following>().isAttacking = true;
-        collider2d.size = new Vector2(0, 0);
+        GetComponent<Following>().isAttacking = true;
         yield return new WaitForSecondsRealtime(attackDelay);
-        collider2d.size = new Vector2(attackRange, 1.95f);
+        canAttack = true;
         yield return new WaitForSecondsRealtime(attackTime);
         isAttacking = false;
-        GetComponentInParent<Following>().isAttacking = false;
+        canAttack = false;
+        GetComponent<Following>().isAttacking = false;
     }
 }
