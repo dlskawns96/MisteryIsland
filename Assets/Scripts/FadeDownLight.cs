@@ -7,7 +7,7 @@ public class FadeDownLight : MonoBehaviour {
     private Light light;
 
     private float start;
-    private float end;
+    public float end;
     private float t = 0.0f;
     private bool isDown = true;
 
@@ -15,8 +15,7 @@ public class FadeDownLight : MonoBehaviour {
     {
         light = GetComponent<Light>();
         start = light.intensity;
-
-        end = light.intensity / 3;
+        
     }
 
     void Update()

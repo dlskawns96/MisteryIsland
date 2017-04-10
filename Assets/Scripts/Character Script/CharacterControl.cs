@@ -133,7 +133,7 @@ public class CharacterControl : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "UpPoint")
-            transform.position = new Vector3(transform.position.x, transform.position.y + up, -1);
+        if (collision.gameObject.tag == "UpPoint" && Input.GetAxisRaw("Horizontal") < 0)
+            transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y + up, -1);
     }
 }

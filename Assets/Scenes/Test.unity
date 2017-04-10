@@ -775,7 +775,7 @@ Transform:
   - {fileID: 743100199}
   - {fileID: 1486893348}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1426538174
 MonoBehaviour:
@@ -788,7 +788,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b91fbb3da0b224b98e649aa71e3459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  isJumping: 0
+  isKnocked: 0
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  up: 0
 --- !u!114 &1426538175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9332218c8443c44da565d28a30d778a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockFromRight: 0
+  isKnocked: 0
 --- !u!1 &1486893343
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,7 +1032,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2043176416
 GameObject:
