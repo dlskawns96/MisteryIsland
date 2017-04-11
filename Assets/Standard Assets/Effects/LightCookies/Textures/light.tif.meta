@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 58bacfb552a215948ad737af0714d897
-timeCreated: 1491819646
+guid: 0383be44326794c44a4be5794119a9f1
+timeCreated: 1491893062
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,8 +13,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapFadeDistanceStart: 2
-    mipMapFadeDistanceEnd: 4
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
@@ -43,7 +43,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 2
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 4
   textureShape: 2

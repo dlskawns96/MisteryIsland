@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FadeDown : MonoBehaviour {
     
-	public void fade()
+    public void fade()
     {
         if(GetComponent<Text>())
         {
