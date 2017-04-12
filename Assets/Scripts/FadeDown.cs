@@ -24,6 +24,8 @@ public class FadeDown : MonoBehaviour {
         while (i.color.a > 0.0f)
         {
             i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+            if(i.color.a <= 0.7f)
+                i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
             yield return null;
         }
     }
@@ -34,6 +36,8 @@ public class FadeDown : MonoBehaviour {
         while (i.color.a > 0.0f)
         {
             i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
+            if (i.color.a <= 0.7f)
+                i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
             yield return null;
         }
     }

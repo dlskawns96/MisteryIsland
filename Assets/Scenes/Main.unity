@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52e0ea59c7abf5d4e9a77e5f54b9b3b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4345e48c48a7864a9c9932eabb781a6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -212,7 +212,7 @@ Light:
   serializedVersion: 7
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 4.82
+  m_Intensity: 5
   m_Range: 70
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7e1c8eccdd632459ab6e5e535a576e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  end: 2
+  end: 3
 --- !u!1 &213548687
 GameObject:
   m_ObjectHideFlags: 0
