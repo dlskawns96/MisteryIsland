@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour {
 
@@ -9,9 +10,12 @@ public class CharacterControl : MonoBehaviour {
     private Rigidbody2D rb2d;
     private Vector2 curVel;
     private SpriteRenderer renderer;
+
     public bool isJumping = false;
     private bool isGrounded = true;
     public bool isKnocked = false;
+    private bool atDoor = false;
+    private bool atBackDoor = false;
 
     private Animator ani;
 
@@ -19,7 +23,7 @@ public class CharacterControl : MonoBehaviour {
     public float groundCheckRadius;
     public LayerMask whatIsGround;
 
-    public float up;
+    public float up;    
 
     void Start()
     {       
@@ -41,7 +45,7 @@ public class CharacterControl : MonoBehaviour {
             renderer.flipX = false;
             //transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)))
         {
             ani.SetBool("CharacterRunning", true);
             ani.SetBool("CharacterWalking", false);
@@ -57,6 +61,18 @@ public class CharacterControl : MonoBehaviour {
         {
             isJumping = true;
             ani.SetBool("CharacterWalking", false);
+        }
+
+        if(Input.GetKey(KeyCode.Space))
+        {
+            if(atDoor)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else if(atBackDoor)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            }
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
@@ -135,5 +151,18 @@ public class CharacterControl : MonoBehaviour {
     {
         if (collision.gameObject.tag == "UpPoint" && Input.GetAxisRaw("Horizontal") < 0)
             transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y + up, -1);
+
+        if (collision.gameObject.tag == "Portal")
+            atDoor = true;
+        else if (collision.gameObject.tag == "BackPortal")
+            atBackDoor = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Portal")
+            atDoor = false;
+        else if (collision.gameObject.tag == "BackPortal")
+            atBackDoor = false;
     }
 }

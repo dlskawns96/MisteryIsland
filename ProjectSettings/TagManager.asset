@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - UpPoint
   - EndPoint
+  - Portal
+  - BackPortal
   layers:
   - Default
   - TransparentFX

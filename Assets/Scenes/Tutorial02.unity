@@ -561,7 +561,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4577701257100066, guid: b7316081a5216cb40a205998ab1f308a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.12
+      value: -3.74
       objectReference: {fileID: 0}
     - target: {fileID: 4577701257100066, guid: b7316081a5216cb40a205998ab1f308a, type: 2}
       propertyPath: m_LocalPosition.z
@@ -928,4 +928,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2109187418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2109187420}
+  - component: {fileID: 2109187419}
+  m_Layer: 0
+  m_Name: BackDoor
+  m_TagString: BackPortal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &2109187419
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109187418}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+--- !u!4 &2109187420
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2109187418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.59, y: -3.49, z: 2.569336}
+  m_LocalScale: {x: 1.5625, y: 1.9124991, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
