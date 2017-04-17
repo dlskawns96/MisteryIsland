@@ -10,7 +10,7 @@ public class SceneChangeEffect : MonoBehaviour {
     private int drawDepth = -1000;
     private float alpha = 1.0f;
     private int fadeDir = -1;
-
+    
     private void OnGUI()
     {
         alpha += fadeDir * fadeSpeed * Time.deltaTime;
@@ -29,6 +29,6 @@ public class SceneChangeEffect : MonoBehaviour {
 
     private void OnLevelWasLoaded(int level)
     {
-        beginFade(-1);
+        beginFade(-1);        
     }
 }
