@@ -45,11 +45,14 @@ public class CharacterControl : MonoBehaviour {
             renderer.flipX = false;
             //transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (Input.GetKey(KeyCode.LeftShift) && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            ani.SetBool("CharacterRunning", true);
-            ani.SetBool("CharacterWalking", false);
             speed = 4f;
+            if((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)))
+            {
+                ani.SetBool("CharacterRunning", true);
+                ani.SetBool("CharacterWalking", false);
+            }    
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
