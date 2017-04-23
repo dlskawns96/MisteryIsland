@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour {
             moveVelocity = Vector3.right;
         }
 
-        transform.position += moveVelocity * 2f * Time.deltaTime;
+        transform.position += moveVelocity * 3f * Time.deltaTime;
     }
 
 }

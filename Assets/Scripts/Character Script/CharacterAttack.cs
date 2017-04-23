@@ -39,6 +39,8 @@ public class CharacterAttack : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 /*공격*/
+                GetComponentInParent<Animator>().SetBool("CharacterJump", false);
+                GetComponentInParent<Animator>().SetBool("CharacterAttack", true);
                 StartCoroutine(attacking());
             }
         }
@@ -65,12 +67,14 @@ public class CharacterAttack : MonoBehaviour {
         isAttacking = true;
         yield return new WaitForSecondsRealtime(attackTime);
         isAttacking = false;
+        
     }
 
     IEnumerator attacking()
     {
-        //공격애니메이션 실행        
+        //공격애니메이션 실행           
         yield return new WaitForSecondsRealtime(attackDelay);
+        GetComponentInParent<Animator>().SetBool("CharacterAttack", false);
         StartCoroutine(delayAttack());
     }
 }

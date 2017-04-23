@@ -1,19 +1,17 @@
 fileFormatVersion: 2
-guid: 315f967d5093baa4084263f0c070b05f
-timeCreated: 1491030378
+guid: 6813f4ae76448bc40926b27a1ebf5b5c
+timeCreated: 1492946582
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CharacterWalking_0
-    21300002: CharacterWalking_1
-    21300004: CharacterWalking_2
-    21300006: CharacterWalking_3
-    21300008: CharacterWalking_4
-    21300010: CharacterWalking_5
-    21300012: CharacterWalking_6
-    21300014: CharacterWalking_7
-    21300016: CharacterWalking_8
-    21300018: CharacterWalking_9
+    21300000: PlayerWalk_0
+    21300002: PlayerWalk_1
+    21300004: PlayerWalk_2
+    21300006: PlayerWalk_3
+    21300008: PlayerWalk_4
+    21300010: PlayerWalk_5
+    21300012: PlayerWalk_6
+    21300014: PlayerWalk_7
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -61,149 +59,123 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
     maxTextureSize: 8192
-    textureFormat: 12
-    textureCompression: 1
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterWalking_0
+      name: PlayerWalk_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 2
-        width: 162
-        height: 355
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterWalking_1
-      rect:
-        serializedVersion: 2
-        x: 185
+        x: 0
         y: 0
-        width: 162
-        height: 360
+        width: 220
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterWalking_2
+      name: PlayerWalk_1
       rect:
         serializedVersion: 2
-        x: 380
+        x: 220
         y: 0
-        width: 90
-        height: 360
+        width: 220
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterWalking_3
+      name: PlayerWalk_2
       rect:
         serializedVersion: 2
-        x: 534
-        y: 2
-        width: 122
-        height: 355
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterWalking_4
-      rect:
-        serializedVersion: 2
-        x: 684
-        y: 2
-        width: 161
-        height: 354
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterWalking_5
-      rect:
-        serializedVersion: 2
-        x: 875
-        y: 4
-        width: 133
-        height: 352
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterWalking_6
-      rect:
-        serializedVersion: 2
-        x: 1059
+        x: 440
         y: 0
-        width: 93
-        height: 358
+        width: 220
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterWalking_7
+      name: PlayerWalk_3
       rect:
         serializedVersion: 2
-        x: 1208
+        x: 660
         y: 0
-        width: 126
-        height: 360
+        width: 220
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterWalking_8
+      name: PlayerWalk_4
       rect:
         serializedVersion: 2
-        x: 1295
-        y: 290
-        width: 42
-        height: 5
+        x: 880
+        y: 0
+        width: 220
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterWalking_9
+      name: PlayerWalk_5
       rect:
         serializedVersion: 2
-        x: 1354
-        y: 198
-        width: 6
-        height: 10
+        x: 1100
+        y: 0
+        width: 220
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerWalk_6
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 0
+        width: 220
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerWalk_7
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 0
+        width: 220
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

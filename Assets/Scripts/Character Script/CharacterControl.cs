@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CharacterControl : MonoBehaviour {
 
-    private float speed = 2f;
+    private float speed = 3f;
     
     private Rigidbody2D rb2d;
     private Vector2 curVel;
@@ -38,32 +38,15 @@ public class CharacterControl : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             renderer.flipX = true;
-            //transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             renderer.flipX = false;
-            //transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 4f;
-            if((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow)))
-            {
-                ani.SetBool("CharacterRunning", true);
-                ani.SetBool("CharacterWalking", false);
-            }    
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            ani.SetBool("CharacterRunning", false);
-            speed = 2f;
         }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.LeftAlt))
         {
             isJumping = true;
-            ani.SetBool("CharacterWalking", false);
         }
 
         if(Input.GetKey(KeyCode.Space))
@@ -77,7 +60,6 @@ public class CharacterControl : MonoBehaviour {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             }
         }
-
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
     }
@@ -119,17 +101,17 @@ public class CharacterControl : MonoBehaviour {
 
         if (Input.GetAxisRaw("Horizontal") < 0)
         {
-            ani.SetBool("CharacterWalking", true);
+            ani.SetBool("CharacterRunning", true);
             moveVelocity = Vector3.left;
         }
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            ani.SetBool("CharacterWalking", true);
+            ani.SetBool("CharacterRunning", true);
             moveVelocity = Vector3.right;
         }
         else
         {
-            ani.SetBool("CharacterWalking", false);
+            ani.SetBool("CharacterRunning", false);
         }
 
         transform.position += moveVelocity * speed * Time.deltaTime;
@@ -140,7 +122,8 @@ public class CharacterControl : MonoBehaviour {
         if (!isJumping)
             return;
 
-        
+
+        ani.SetBool("CharacterJump", true);
         rb2d.velocity = Vector2.zero;
 
         Vector2 jumpVelocity = new Vector2(0, 10);
@@ -167,5 +150,11 @@ public class CharacterControl : MonoBehaviour {
             atDoor = false;
         else if (collision.gameObject.tag == "BackPortal")
             atBackDoor = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+            ani.SetBool("CharacterJump", false);
     }
 }

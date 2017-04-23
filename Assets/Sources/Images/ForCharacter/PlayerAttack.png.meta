@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: f1793f9ea7d56a64d977c0f9b4235975
-timeCreated: 1491030719
+guid: 2290c3bbabaf5bf44bb632b87649a704
+timeCreated: 1492954656
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CharacterRunning_0
-    21300002: CharacterRunning_1
-    21300004: CharacterRunning_2
-    21300006: CharacterRunning_3
-    21300008: CharacterRunning_4
-    21300010: CharacterRunning_5
-    21300012: CharacterRunning_6
-    21300014: CharacterRunning_7
-    21300016: CharacterRunning_8
-    21300018: CharacterRunning_9
+    21300000: PlayerAttack_0
+    21300002: PlayerAttack_1
+    21300004: PlayerAttack_2
+    21300006: PlayerAttack_3
+    21300008: PlayerAttack_4
+    21300010: PlayerAttack_5
+    21300012: PlayerAttack_6
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -61,149 +58,110 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
     maxTextureSize: 8192
-    textureFormat: 12
-    textureCompression: 1
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterRunning_0
+      name: PlayerAttack_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 6
-        width: 255
-        height: 316
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_1
-      rect:
-        serializedVersion: 2
-        x: 309
-        y: 4
-        width: 222
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_2
-      rect:
-        serializedVersion: 2
-        x: 643
-        y: 1
-        width: 115
-        height: 327
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_3
-      rect:
-        serializedVersion: 2
-        x: 891
-        y: 8
-        width: 178
-        height: 313
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_4
-      rect:
-        serializedVersion: 2
-        x: 1122
-        y: 29
-        width: 276
-        height: 292
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_5
-      rect:
-        serializedVersion: 2
-        x: 1412
-        y: 6
-        width: 256
-        height: 317
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_6
-      rect:
-        serializedVersion: 2
-        x: 1709
-        y: 5
-        width: 223
-        height: 318
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: CharacterRunning_7
-      rect:
-        serializedVersion: 2
-        x: 2038
+        x: 0
         y: 0
-        width: 125
-        height: 330
+        width: 300
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterRunning_8
+      name: PlayerAttack_1
       rect:
         serializedVersion: 2
-        x: 2292
-        y: 7
-        width: 177
-        height: 314
+        x: 300
+        y: 0
+        width: 300
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: CharacterRunning_9
+      name: PlayerAttack_2
       rect:
         serializedVersion: 2
-        x: 2524
-        y: 29
-        width: 273
-        height: 292
+        x: 600
+        y: 0
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAttack_3
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAttack_5
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 0
+        width: 300
+        height: 400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PlayerAttack_6
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 300
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
