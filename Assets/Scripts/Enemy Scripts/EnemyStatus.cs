@@ -15,6 +15,7 @@ public class EnemyStatus : MonoBehaviour {
             /*
              * 몬스터 죽음
              */
+            this.gameObject.SetActive(false);
         }
     }
 

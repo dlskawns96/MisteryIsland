@@ -8,9 +8,8 @@ public class Detecter : MonoBehaviour {
     public bool isBeaten = false;
     private bool isAttacking = false;
     private bool canAttack = false;
-
-    private float attackRange = 5f;
-    private float attackDelay = 1f;
+    
+    private float attackDelay = 2f;
     private float attackTime = 0.2f;
 
     private int attackDamage = 10;
@@ -23,14 +22,7 @@ public class Detecter : MonoBehaviour {
     private int mask;
     private RaycastHit2D hit2d;
     private RaycastHit2D attackHit2d;
-
-    /*
-     *  TriggerEnter로 들어오면 타이머를 키고
-     *  TriggerExit으로 나갈때 타이머를 꺼서
-     *  시간이 얼마나 경과했는지 검사
-     *  딜레이보다 길게 지났으면 타격 성공
-     */
-
+    
     private void Start()
     {
         collider2d = GetComponent<BoxCollider2D>();
@@ -55,12 +47,12 @@ public class Detecter : MonoBehaviour {
                 GetComponent<Following>().targeting(hit2d.collider.gameObject);
                 targeted = true;
                 target = hit2d.collider.gameObject;
-                detectRange = detectRange / 2;
+                detectRange = detectRange * 0.4f;
             }
         }   
         else
         {
-            if (transform.rotation.y == -1)
+            if (GetComponent<SpriteRenderer>().flipX)
             {
                 hit2d = Physics2D.Raycast(transform.position, Vector2.right, detectRange, mask);
             }
@@ -81,7 +73,7 @@ public class Detecter : MonoBehaviour {
     
     private void Update()
     {
-        if(canAttack)
+        if(targeted)
         {
             if (transform.rotation.y == -1)
             {
@@ -91,30 +83,34 @@ public class Detecter : MonoBehaviour {
             {
                 attackHit2d = Physics2D.Raycast(transform.position, Vector2.left, detectRange, mask);
             }
+        }       
 
-            if(attackHit2d)
+        if(attackHit2d)
+        {
+            if (!isBeaten && canAttack)
             {
-                if (!isBeaten)
-                {
-                    if (target.transform.position.x > transform.position.x)
-                        target.GetComponent<CharacterStatus>().knockFromRight = false;
-                    else
-                        target.GetComponent<CharacterStatus>().knockFromRight = true;
-                    target.GetComponent<CharacterStatus>().attacked(attackDamage);
-                }
+                GetComponent<Following>().isAttacking = true;
+                if (target.transform.position.x > transform.position.x)
+                    target.GetComponent<CharacterStatus>().knockFromRight = false;
+                else
+                    target.GetComponent<CharacterStatus>().knockFromRight = true;
+                target.GetComponent<CharacterStatus>().attacked(attackDamage);
             }
         }
+        else
+        {
+            GetComponent<Following>().isAttacking = false;
+        }        
     }
 
     IEnumerator waitAndAttack()
     {
         isAttacking = true;
-        GetComponent<Following>().isAttacking = true;
+        GetComponent<Following>().isAttacking = true;  
         yield return new WaitForSecondsRealtime(attackDelay);
         canAttack = true;
         yield return new WaitForSecondsRealtime(attackTime);
         isAttacking = false;
-        canAttack = false;
-        GetComponent<Following>().isAttacking = false;
+        canAttack = false;        
     }
 }

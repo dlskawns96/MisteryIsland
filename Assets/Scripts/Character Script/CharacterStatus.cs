@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class CharacterStatus : MonoBehaviour {
 
-    protected int HP = 30;
+    public int HP = 30;
     private bool isUnbeatable;
     private Color col;
     private float t;

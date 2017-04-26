@@ -27,12 +27,12 @@ public class Following : MonoBehaviour {
             {
                 if (atLeft)
                 {
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    GetComponent<SpriteRenderer>().flipX = false;
                     rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
                 }
                 else
                 {
-                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    GetComponent<SpriteRenderer>().flipX = true;
                     rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
                 }
             }

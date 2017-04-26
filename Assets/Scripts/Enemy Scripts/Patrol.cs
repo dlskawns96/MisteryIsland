@@ -54,7 +54,8 @@ public class Patrol : MonoBehaviour
         rb2d.velocity = new Vector2(speed,rb2d.velocity.y);
         if (transform.position.x >= dest1)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            GetComponent<SpriteRenderer>().flipX = false;
+           // transform.rotation = Quaternion.Euler(0, 0, 0);
             isReturn = true;
         }
 
@@ -65,7 +66,8 @@ public class Patrol : MonoBehaviour
         rb2d.velocity = new Vector2(-speed, rb2d.velocity.y);
         if (transform.position.x <= dest2)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            GetComponent<SpriteRenderer>().flipX = true;
+            //transform.rotation = Quaternion.Euler(0, 180, 0);
             isReturn = false;
         }
     }
