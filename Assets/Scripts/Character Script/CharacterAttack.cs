@@ -56,7 +56,10 @@ public class CharacterAttack : MonoBehaviour {
 
             if(hit2d)
             {
-                hit2d.collider.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
+                if(hit2d.collider.gameObject.name == "Crab")
+                    hit2d.collider.gameObject.GetComponent<CrabPatrol>().beaten();                
+                else
+                    hit2d.collider.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
             }
         }
 		
