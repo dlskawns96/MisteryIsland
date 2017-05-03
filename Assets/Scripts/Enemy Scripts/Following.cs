@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Following : MonoBehaviour {
+        
+    private GameObject target;
+    private Rigidbody2D rb2d;
+    private Animator ani;
+
+    private float speed;
 
     private bool targetOn = false, atLeft;
-    private GameObject target;
-    private float speed;
-    private Rigidbody2D rb2d;
     public bool isAttacking = false;
     public bool isBeaten = false;
 
@@ -15,6 +18,7 @@ public class Following : MonoBehaviour {
     {
         speed = GetComponent<Patrol>().getSpeed();
         rb2d = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
         StartCoroutine(CheckDirection());
     }
     
@@ -25,6 +29,7 @@ public class Following : MonoBehaviour {
         {
             if (!isAttacking && !isBeaten)
             {
+                ani.SetBool("EnemyMoving", true);
                 if (atLeft)
                 {
                     GetComponent<SpriteRenderer>().flipX = false;
@@ -36,6 +41,8 @@ public class Following : MonoBehaviour {
                     rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
                 }
             }
+            else
+                ani.SetBool("EnemyMoving", false);
         }
     }
 
@@ -48,7 +55,7 @@ public class Following : MonoBehaviour {
 
     IEnumerator CheckDirection() //따라갈때 방향전환 딜레이
     {
-        if (targetOn)
+        if (targetOn && !isAttacking)
         {
             if (target.transform.position.x > transform.position.x) // 타겟이 오른쪽에 있으면
                 atLeft = false;

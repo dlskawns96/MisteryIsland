@@ -10,8 +10,8 @@ using UnityEngine;
 public class CharacterAttack : MonoBehaviour {
 
     private int attackPower = 1;
-    private float attackDelay = 0.5f;
-    private float attackTime = 0.2f;
+    private float attackDelay = 0.375f;
+    private float attackTime = 0.375f;
 
     private bool isAttacking = false;
     private BoxCollider2D attackRange;
@@ -69,8 +69,7 @@ public class CharacterAttack : MonoBehaviour {
     {
         isAttacking = true;
         yield return new WaitForSecondsRealtime(attackTime);
-        isAttacking = false;
-        
+        isAttacking = false;        
     }
 
     IEnumerator attacking()

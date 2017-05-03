@@ -9,7 +9,7 @@ using UnityEngine;
 public class CharacterStatus : MonoBehaviour {
 
     public int HP = 30;
-    private bool isUnbeatable;
+   
     private Color col;
     private float t;
     private Rigidbody2D rb2d;
@@ -17,6 +17,8 @@ public class CharacterStatus : MonoBehaviour {
     private float knockback = 2;
     private float knockbackLength;
     private float knockbackCount = 0.2f;
+
+    private bool isUnbeatable;
     public bool knockFromRight;
     public bool isKnocked = false;
 
