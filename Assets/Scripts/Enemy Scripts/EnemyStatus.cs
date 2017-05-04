@@ -13,10 +13,7 @@ public class EnemyStatus : MonoBehaviour {
     {
         if(hp <= 0)
         {
-            /*
-             * 몬스터 죽음
-             */
-            this.gameObject.SetActive(false);
+            StartCoroutine(EnemyDie());
         }
     }
 
@@ -41,5 +38,14 @@ public class EnemyStatus : MonoBehaviour {
         yield return new WaitForSecondsRealtime(afterDelay);        
         GetComponent<Detecter>().isBeaten = false;
         GetComponent<Following>().isBeaten = false;
+    }
+
+    IEnumerator EnemyDie()
+    {
+        GetComponent<Animator>().SetBool("EnemyDie", true);
+        GetComponent<Detecter>().enabled = false;
+        GetComponent<Following>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.5f);
+        this.gameObject.SetActive(false);
     }
 }

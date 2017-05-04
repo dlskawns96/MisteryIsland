@@ -1339,6 +1339,11 @@ Prefab:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114648616878274734, guid: aa8d870c54dbc0b4ba3fdf57496dc838,
+        type: 2}
+      propertyPath: hp
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61045328690082304, guid: aa8d870c54dbc0b4ba3fdf57496dc838, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: aa8d870c54dbc0b4ba3fdf57496dc838, type: 2}
