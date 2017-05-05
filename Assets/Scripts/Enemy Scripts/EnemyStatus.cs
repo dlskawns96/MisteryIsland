@@ -9,6 +9,8 @@ public class EnemyStatus : MonoBehaviour {
     private float unbeatableTime = 0.5f;
     private float afterDelay = 0.25f;
 
+    public AudioSource hitSound;
+
     private void Update()
     {
         if(hp <= 0)
@@ -21,6 +23,7 @@ public class EnemyStatus : MonoBehaviour {
     {
         if(!isHitting)
         {
+            hitSound.Play();
             hp -= damage;
             isHitting = true;
             StartCoroutine(makeBeatable());
@@ -35,9 +38,15 @@ public class EnemyStatus : MonoBehaviour {
         yield return new WaitForSecondsRealtime(unbeatableTime);
         isHitting = false;
         GetComponent<Animator>().SetBool("EnemyBeaten", false);
-        yield return new WaitForSecondsRealtime(afterDelay);        
-        GetComponent<Detecter>().isBeaten = false;
+        yield return new WaitForSecondsRealtime(afterDelay);
+        StartCoroutine(AttackDelay());
         GetComponent<Following>().isBeaten = false;
+    }
+
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSecondsRealtime(unbeatableTime * 1.75f);
+        GetComponent<Detecter>().isBeaten = false;
     }
 
     IEnumerator EnemyDie()

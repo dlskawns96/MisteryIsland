@@ -24,6 +24,8 @@ public class CharacterAttack : MonoBehaviour {
 
     private SpriteRenderer renderer;
 
+    private bool rayHit = false;
+
 	void Start () {
         attackRange = GetComponent<BoxCollider2D>();
         attackRange.enabled = false;
@@ -39,6 +41,12 @@ public class CharacterAttack : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 /*공격*/
+                isAttacking = true;
+                GetComponent<AudioSource>().Play();
+                if (renderer.flipX) //왼쪽
+                    hit2d = Physics2D.Raycast(transform.position, Vector2.left, rayRange, mask);
+                else
+                    hit2d = Physics2D.Raycast(transform.position, Vector2.right, rayRange, mask);
                 GetComponentInParent<Animator>().SetBool("CharacterJump", false);
                 GetComponentInParent<Animator>().SetBool("CharacterAttack", true);
                 StartCoroutine(attacking());
@@ -46,35 +54,33 @@ public class CharacterAttack : MonoBehaviour {
         }
         else
         {
-            if (renderer.flipX) //왼쪽
+            if (hit2d & !rayHit)
             {
-                hit2d = Physics2D.Raycast(transform.position, Vector2.left, rayRange, mask);
-                Debug.DrawRay(transform.position, Vector2.left);
-            }
-            else
-                hit2d = Physics2D.Raycast(transform.position, Vector2.right, rayRange, mask);
-
-            if(hit2d)
-            {
-                if(hit2d.collider.gameObject.name == "Crab")
-                    hit2d.collider.gameObject.GetComponent<CrabPatrol>().beaten();                
+                rayHit = true;
+                if (hit2d.collider.gameObject.name == "Crab")
+                    hit2d.collider.gameObject.GetComponent<CrabPatrol>().beaten();
                 else
-                    hit2d.collider.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
+                {
+                    if(!hit2d.collider.gameObject.GetComponent<EnemyStatus>().isHitting)
+                        hit2d.collider.gameObject.GetComponent<EnemyStatus>().isBeaten(attackPower);
+                    Debug.Log("Ray Hit");
+                }
             }
         }
 		
 	}
 
     IEnumerator delayAttack()
-    {
-        isAttacking = true;
+    {       
         yield return new WaitForSecondsRealtime(attackTime);
+        rayHit = false;
         isAttacking = false;        
     }
 
     IEnumerator attacking()
     {
         //공격애니메이션 실행           
+        
         yield return new WaitForSecondsRealtime(attackDelay);
         GetComponentInParent<Animator>().SetBool("CharacterAttack", false);
         StartCoroutine(delayAttack());

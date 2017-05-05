@@ -13,25 +13,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: EnemyMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: EnemyBeaten
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: EnemyDie
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -597,19 +597,19 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102176130868512822}
-    m_Position: {x: 372, y: 96, z: 0}
+    m_Position: {x: 360, y: 108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102710944908580870}
-    m_Position: {x: 600, y: -24, z: 0}
+    m_Position: {x: 588, y: -72, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102632049455046468}
     m_Position: {x: 144, y: -48, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102082425879554194}
-    m_Position: {x: 564, y: -228, z: 0}
+    m_Position: {x: 516, y: -252, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102376754918039186}
-    m_Position: {x: 204, y: -204, z: 0}
+    m_Position: {x: 192, y: -228, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -7,6 +7,7 @@ public class Detecter : MonoBehaviour {
     private GameObject target;
     private BoxCollider2D collider2d;
     private Animator ani;
+    public AudioSource growlSound;
 
     public bool targeted = false;
     public bool isBeaten = false;
@@ -47,6 +48,7 @@ public class Detecter : MonoBehaviour {
             {
                 GetComponent<Following>().targeting(hit2d.collider.gameObject);
                 targeted = true;
+                growlSound.Play();
                 target = hit2d.collider.gameObject;
                 detectRange = detectRange * 0.2f;
             }
@@ -72,7 +74,7 @@ public class Detecter : MonoBehaviour {
                     StartCoroutine(waitAndAttack());
                 }
 
-                if (!isBeaten && canAttack)
+                if (canAttack && !isBeaten)
                 {
                     GetComponent<Following>().isAttacking = true;
                     if (target.transform.position.x > transform.position.x)
@@ -96,13 +98,15 @@ public class Detecter : MonoBehaviour {
 
     IEnumerator waitAndAttack()
     {
-        yield return new WaitForSecondsRealtime(0.2f);
-        isAttacking = true;
         GetComponent<Following>().isAttacking = true;
+        yield return new WaitForSecondsRealtime(0.25f); //공격 선딜
+        GetComponent<EnemyStatus>().isHitting = true;
+        isAttacking = true;        
         ani.SetBool("EnemyAttack", true);
         yield return new WaitForSecondsRealtime(attackDelay);
         canAttack = true;
         yield return new WaitForSecondsRealtime(attackTime);
+        GetComponent<EnemyStatus>().isHitting = false;
         ani.SetBool("EnemyAttack", false);
         GetComponent<Following>().isAttacking = false;
         isAttacking = false;
