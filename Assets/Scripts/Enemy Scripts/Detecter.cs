@@ -71,6 +71,7 @@ public class Detecter : MonoBehaviour {
             {
                 if (!isAttacking && !isBeaten)
                 {
+                    GetComponent<Following>().isAttacking = true;
                     StartCoroutine(waitAndAttack());
                 }
 
@@ -84,6 +85,8 @@ public class Detecter : MonoBehaviour {
                     target.GetComponent<CharacterStatus>().attacked(attackDamage);
                 }
             }
+            else if(!isAttacking)
+                GetComponent<Following>().isAttacking = false;
         }
     }
     
@@ -106,10 +109,9 @@ public class Detecter : MonoBehaviour {
         yield return new WaitForSecondsRealtime(attackDelay);
         canAttack = true;
         yield return new WaitForSecondsRealtime(attackTime);
-        GetComponent<EnemyStatus>().isHitting = false;
-        ani.SetBool("EnemyAttack", false);
-        GetComponent<Following>().isAttacking = false;
         isAttacking = false;
-        canAttack = false;        
+        canAttack = false;
+        GetComponent<EnemyStatus>().isHitting = false;
+        ani.SetBool("EnemyAttack", false);            
     }
 }

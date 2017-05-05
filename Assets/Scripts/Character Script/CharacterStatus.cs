@@ -42,6 +42,7 @@ public class CharacterStatus : MonoBehaviour {
             HP -= damage;
             isUnbeatable = true;
             GetComponent<CharacterControl>().isKnocked = true;
+            GetComponent<Animator>().SetBool("CharacterHit", true);
 
             if (knockFromRight)
                 rb2d.velocity = new Vector2(-knockback, knockback);
@@ -57,15 +58,20 @@ public class CharacterStatus : MonoBehaviour {
     {
         if(HP <= 0)
         {
-            /*
-             *   사망
-             */
+            GetComponent<Animator>().SetBool("CharacterDie", true);
+            StartCoroutine(Die());  
         }
 
         if(isUnbeatable)
         {
             
         }
+    }
+
+    IEnumerator Die()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        this.gameObject.SetActive(false);
     }
 
     IEnumerator makeBeatable()
@@ -77,6 +83,7 @@ public class CharacterStatus : MonoBehaviour {
         
         Debug.Log("무적");
         yield return new WaitForSecondsRealtime(0.5f);
+        GetComponent<Animator>().SetBool("CharacterHit", false);
         isUnbeatable = false;
         col.a = 255;
     }
